@@ -1,0 +1,31 @@
+{
+  "name": "todolist-v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "install-lambda": "cd ./lambda && ./install-lambda-functions.sh",
+    "zip-lambda": "cd ./lambda && ./zip-lambda-functions.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "14.15.4"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^16.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.19",
+    "qs": "^6.10.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
