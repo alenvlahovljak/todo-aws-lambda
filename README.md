@@ -6,7 +6,7 @@
 * ejs,
 * MongoDB
 
-##preparation
+## preparation
 * NODE_ENV=staging
 * PORT=4000
 * MONGODB_URI={uri}
