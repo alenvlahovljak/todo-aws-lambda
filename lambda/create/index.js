@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const MongoClient = require("mongodb").MongoClient;
+const {MongoClient} = require("mongodb");
 
 AWS.config.region = process.env.REGION;
 
@@ -23,7 +23,7 @@ exports.handler = async (event, context) => {
 
     try {
         const db = await connectToDatabase();
-        const r = await db.collection('items').insertMany([{name: event['name']}])
+        await db.collection('items').insertMany([{name: event['name']}])
 
         const params = {
             FunctionName: 'readTodos',
@@ -31,15 +31,16 @@ exports.handler = async (event, context) => {
             LogType: 'Tail',
         };
 
-        return await lambda.invoke(params, function (err, data) {
+        return await lambda.invoke(params, function (err, {Payload}) {
             if (err) {
                 context.fail(err);
             } else {
-                context.succeed(JSON.parse(data.Payload));
+                const payload = JSON.parse(Payload);
+                context.succeed(JSON.parse(payload.body));
             }
         }).promise()
     } catch (e) {
-        console.log({e})
+        console.log({e});
 
         return {
             error: "Error",

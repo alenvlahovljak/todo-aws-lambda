@@ -1,4 +1,4 @@
-const MongoClient = require("mongodb").MongoClient;
+const {MongoClient} = require("mongodb");
 const {ObjectId} = require('mongodb');
 
 let cachedDb = null;
@@ -19,8 +19,6 @@ exports.handler = async (event, context) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     try {
-
-        console.log({event, context})
 
         const db = await connectToDatabase();
         await db.collection('items').deleteOne({"_id": ObjectId(event['id'])});

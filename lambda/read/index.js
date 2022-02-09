@@ -1,5 +1,4 @@
 const {MongoClient} = require("mongodb");
-const {ObjectId} = require('mongodb');
 
 let cachedDb = null;
 
@@ -12,24 +11,39 @@ async function connectToDatabase() {
     const db = await client.db(process.env.DB_NAME);
 
     cachedDb = db;
+
     return db;
 }
 
 exports.handler = async (event, context) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
+    const query = event.queryStringParameters || {};
+
+    let limit = 10;
+    let offset = 0;
+
+    if(query['limit']){
+        limit = Number(query['limit']);
+    }
+
+    if(query['offset']){
+        offset = Number(query['offset']);
+    }
+
     try {
-
-        console.log({event, context})
-
         const db = await connectToDatabase();
-        await db.collection('items').deleteOne({"_id": ObjectId(event['id'])});
+        const results = await db.collection("items").find({}).limit(limit).skip(offset).toArray();
 
-        return {}
+        return {
+            "statusCode": 200,
+            "body": JSON.stringify({
+                count: results.length,
+                results: results
+            }),
+        }
 
     } catch (e) {
-        console.log({e})
-
         return {
             error: "Error",
             reason: JSON.stringify(e)
