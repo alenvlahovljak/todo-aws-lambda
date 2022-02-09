@@ -1,28 +1,26 @@
-## express-mongoDB-TodoList
-Todo List made from udemy course: 2021 Complete Web Develoment course from angela yu
+## Todo list with AWS Lambda
 
 ## technologies
-
-* node.js,
-* express,
+* NodeJS,
+* Express.js,
 * ejs,
-* MongoDB, 
-* mongoose, 
-* bodyParser, 
-* loadash, 
+* MongoDB
+
+##preparation
+* NODE_ENV=staging
+* PORT=4000
+* MONGODB_URI={uri}
+* LAMBDA_API={api}
+* REGION={region}
 
 ## instalation
 ```node.js
-  git clone https://github.com/Leonardpepa/express-mongoDB-TodoList.git
+  git clone https://github.com/alenvlahovljak/todo-aws-lambda.git
   run npm instal
   run mongod in the terminal
-  run node app.js
-  open localhost:3000
+  run npm dev
+  open localhost:4000
   ```
 ## requirements
-  node.js
-  MongoDB
-
-
-## live: https://serene-lowlands-60843.herokuapp.com
-### hosted on heroku with mongoDB ATLAS
+  * NodeJS
+  * MongoDB (or AtlasDB)

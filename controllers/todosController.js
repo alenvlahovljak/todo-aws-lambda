@@ -17,7 +17,6 @@ module.exports.getTodos = async (req, res) => {
 }
 
 module.exports.createTodo = async (req, res) => {
-    console.log('halo')
     const {newItem} = req.body;
 
     const day = date.getDate();
